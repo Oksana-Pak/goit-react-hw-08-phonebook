@@ -5,13 +5,13 @@ export class ContactForm extends Component {
   state = {
     name: '',
     id: '',
+    number: '',
   };
 
   handleInputChange = e => {
-    const name = e.currentTarget.value;
     const id = nanoid();
 
-    this.setState({ name, id });
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value, id });
   };
 
   handleSubmit = e => {
@@ -23,6 +23,7 @@ export class ContactForm extends Component {
     this.setState({
       name: '',
       id: '',
+      number: '',
     });
   };
   render() {
@@ -39,8 +40,20 @@ export class ContactForm extends Component {
             value={this.state.name}
             onChange={this.handleInputChange}
           />
-          <button type="submit">Add contact</button>
         </label>
+        <label htmlFor="">
+          Number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={this.state.number}
+            onChange={this.handleInputChange}
+          />
+        </label>
+        <button type="submit">Add contact</button>
       </form>
     );
   }
