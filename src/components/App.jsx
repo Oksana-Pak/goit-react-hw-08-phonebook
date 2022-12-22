@@ -14,11 +14,24 @@ export class App extends Component {
     filter: '',
   };
 
+  // addContact = contact => {
+  //   this.setState(({ contacts }) => ({
+  //     contacts: [contact, ...contacts],
+  //   }));
+  // };
   addContact = contact => {
+    if (this.checkContact(contact)) {
+      alert(`${contact.name} is already in contacts`);
+      return;
+    }
+
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
   };
+
+  checkContact = contact =>
+    this.state.contacts.find(({ name }) => name === contact.name);
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
