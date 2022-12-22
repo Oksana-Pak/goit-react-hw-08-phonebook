@@ -1,6 +1,8 @@
+import { Label } from 'components/Filter.styled';
+
 export const Filter = ({ value, onChange }) => (
-  <label htmlFor="">
+  <Label>
     Find contacts by name
     <input type="text" value={value} onChange={onChange} />
-  </label>
+  </Label>
 );

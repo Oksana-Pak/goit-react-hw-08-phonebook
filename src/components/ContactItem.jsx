@@ -1,8 +1,10 @@
+import { Item, Button } from 'components/ContactItem.styled';
+
 export const ContactItem = ({ id, name, number, deleteContact }) => (
-  <li>
+  <Item>
     <p>
       {name}: {number}
     </p>
-    <button onClick={() => deleteContact(id)}>Delete</button>
-  </li>
+    <Button onClick={() => deleteContact(id)}>Delete</Button>
+  </Item>
 );

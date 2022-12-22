@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
+import { Container } from 'components/App.styled';
 
 export class App extends Component {
   state = {
@@ -45,7 +46,7 @@ export class App extends Component {
     );
 
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
@@ -54,7 +55,7 @@ export class App extends Component {
           options={!visibleContacts.length ? contacts : visibleContacts}
           onDeleteContact={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
