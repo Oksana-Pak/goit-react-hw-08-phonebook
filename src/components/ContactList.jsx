@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem';
 import { nanoid } from 'nanoid';
 
@@ -9,8 +10,18 @@ export const ContactList = ({ options, onDeleteContact }) => (
         id={id}
         name={name}
         number={number}
-        deleteContact={onDeleteContact}
+        onDeleteContact={onDeleteContact}
       />
     ))}
   </ul>
 );
+ContactList.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
+};
