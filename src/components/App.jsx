@@ -14,11 +14,6 @@ export class App extends Component {
     filter: '',
   };
 
-  // addContact = contact => {
-  //   this.setState(({ contacts }) => ({
-  //     contacts: [contact, ...contacts],
-  //   }));
-  // };
   addContact = contact => {
     if (this.checkContact(contact)) {
       alert(`${contact.name} is already in contacts`);
@@ -37,6 +32,11 @@ export class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
+  deleteContact = contactId =>
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+    }));
+
   render() {
     const { contacts, filter } = this.state;
     const normalizeFilter = this.state.filter.toLowerCase();
@@ -52,6 +52,7 @@ export class App extends Component {
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           options={!visibleContacts.length ? contacts : visibleContacts}
+          onDeleteContact={this.deleteContact}
         />
       </div>
     );
