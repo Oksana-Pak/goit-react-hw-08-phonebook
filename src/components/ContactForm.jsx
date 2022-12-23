@@ -1,29 +1,24 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 import { Form, Label, Button } from 'components/ContactForm.styled';
 
 export class ContactForm extends Component {
   state = {
     name: '',
-    id: '',
     number: '',
   };
 
   handleInputChange = e => {
-    const id = nanoid();
-
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value, id });
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
-    this.reset();
+    this.props.onSubmit(this.state, this.reset);
   };
   reset = () => {
     this.setState({
       name: '',
-      id: '',
       number: '',
     });
   };
@@ -59,3 +54,7 @@ export class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
@@ -15,19 +16,26 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = contact => {
-    if (this.checkContact(contact)) {
-      alert(`${contact.name} is already in contacts`);
+  addContact = ({ name, number }, reset) => {
+    if (this.checkContact(name)) {
+      alert(`${name} is already in contacts`);
       return;
     }
-
+    const contact = {
+      id: nanoid(),
+      name,
+      number,
+    };
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
+    reset();
   };
 
-  checkContact = contact =>
-    this.state.contacts.find(({ name }) => name === contact.name);
+  checkContact = name => {
+    const { contacts } = this.state;
+    return contacts.find(contact => name === contact.name);
+  };
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
