@@ -4,7 +4,7 @@ import { Label } from 'components/Filter.styled';
 export const Filter = ({ value, onChange }) => (
   <Label>
     Find contacts by name
-    <input type="text" value={value} onChange={onChange} />
+    <input type="text" name="filter" value={value} onChange={onChange} />
   </Label>
 );
 
