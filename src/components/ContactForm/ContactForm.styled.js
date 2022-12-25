@@ -1,21 +1,26 @@
 import styled from 'styled-components';
+import { Form, Field, ErrorMessage } from 'formik';
 
-export const Form = styled.form`
+export const FormikForm = styled(Form)`
   width: 30%;
   padding: 20px;
   border: 1px solid black;
 `;
 
-export const Label = styled.label`
+export const FormikLabel = styled.label`
   display: flex;
   flex-direction: column;
-
-  input {
-    width: 40%;
-    margin: 5px 0 15px;
-  }
 `;
-export const Button = styled.button`
+export const FormikInput = styled(Field)`
+  width: 40%;
+  margin: 5px 0 15px;
+`;
+export const FormikError = styled(ErrorMessage)`
+  font-weight: 700;
+  color: red;
+`;
+
+export const FormikButton = styled.button`
   margin-top: 5px;
   padding: 2px 10px;
   background-color: transparent;
