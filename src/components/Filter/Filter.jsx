@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Label } from 'components/Filter.styled';
+import { Label } from './Filter.styled';
 
 export const Filter = ({ value, onChange }) => (
   <Label htmlFor="filter">

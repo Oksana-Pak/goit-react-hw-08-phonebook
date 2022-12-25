@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ContactItem } from 'components/ContactItem';
+import { ContactItem } from '../ContactItem';
 
 export const ContactList = ({ options, onDeleteContact }) => (
   <ul>
