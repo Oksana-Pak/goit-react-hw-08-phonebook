@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import { addContact } from 'redux/contactsSlice';
 import {
   FormikForm,
   FormikLabel,
@@ -31,10 +33,23 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+
+  const checkContact = name => contacts.find(contact => name === contact.name);
+
+  const newContact = ({ name, number }) => ({ id: nanoid(), name, number });
+
   const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values, resetForm);
+    if (checkContact(values.name)) {
+      return alert(`${values.name} is already in contacts`);
+    }
+
+    dispatch(addContact(newContact(values)));
+    resetForm();
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -56,8 +71,4 @@ export const ContactForm = ({ onSubmit }) => {
       </FormikForm>
     </Formik>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
