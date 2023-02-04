@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 import { nanoid } from '@reduxjs/toolkit';
 import { addContact } from 'redux/contactsSlice';
 import {
@@ -35,7 +36,7 @@ const initialValues = {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
 
   const checkContact = name => contacts.find(contact => name === contact.name);
 
