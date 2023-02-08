@@ -1,9 +1,13 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { nanoid } from '@reduxjs/toolkit';
-import { addContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import {
+  errorMessage,
+  successMessage,
+} from 'components/services/notifications';
+
 import {
   FormikForm,
   FormikLabel,
@@ -36,18 +40,18 @@ const initialValues = {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const checkContact = name => contacts.find(contact => name === contact.name);
 
-  const newContact = ({ name, number }) => ({ id: nanoid(), name, number });
-
   const handleSubmit = (values, { resetForm }) => {
     if (checkContact(values.name)) {
-      return alert(`${values.name} is already in contacts`);
+      errorMessage(`${values.name} is already in contacts`);
+      return;
     }
 
-    dispatch(addContact(newContact(values)));
+    dispatch(addContact(values));
+    successMessage(`${values.name} is added to contacts`);
     resetForm();
   };
 

@@ -8,3 +8,6 @@ export const Label = styled.label`
     margin-top: 10px;
   }
 `;
+export const Input = styled.input`
+  position: relative;
+`;
