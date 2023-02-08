@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export const errorMessage = message => {
@@ -11,6 +11,7 @@ export const errorMessage = message => {
     draggable: true,
     progress: undefined,
     theme: 'colored',
+    transition: Slide,
   });
 };
 export const successMessage = message => {
@@ -23,5 +24,6 @@ export const successMessage = message => {
     draggable: true,
     progress: undefined,
     theme: 'colored',
+    transition: Slide,
   });
 };
