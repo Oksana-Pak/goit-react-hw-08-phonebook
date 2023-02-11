@@ -9,8 +9,9 @@ export const Loader = () => (
     ariaLabel="three-dots-loading"
     wrapperStyle={{
       position: 'absolute',
-      top: '400px',
-      left: '2%',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
     }}
     wrapperClassName=""
     visible={true}

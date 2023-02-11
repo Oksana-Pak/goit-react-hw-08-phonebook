@@ -1,8 +1,8 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/operations';
 import {
   errorMessage,
   successMessage,
@@ -46,7 +46,7 @@ export const ContactForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     if (checkContact(values.name)) {
-      errorMessage(`${values.name} is already in contacts`);
+      errorMessage(`Sorry, the contact ${values.name} is already in contacts`);
       return;
     }
 
