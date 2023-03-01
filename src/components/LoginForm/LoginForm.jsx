@@ -29,22 +29,24 @@ export const LoginForm = () => {
   };
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit} autoComplete="off">
-        <FormTitle>Welcome</FormTitle>
-        <Input type="email" name="email" placeholder="Email" />
+    <section>
+      <Container>
+        <Form onSubmit={handleSubmit} autoComplete="off">
+          <FormTitle>Welcome</FormTitle>
+          <Input type="email" name="email" placeholder="Email" />
 
-        <Input type="password" name="password" placeholder="Password" />
+          <Input type="password" name="password" placeholder="Password" />
 
-        <Button type="submit">Log In</Button>
-      </Form>
-      <div>
-        <DropFirst></DropFirst>
-        <DropSecond></DropSecond>
-        <DropThird></DropThird>
-        <DropForth></DropForth>
-        <DropFifth></DropFifth>
-      </div>
-    </Container>
+          <Button type="submit">Log In</Button>
+        </Form>
+        <div>
+          <DropFirst></DropFirst>
+          <DropSecond></DropSecond>
+          <DropThird></DropThird>
+          <DropForth></DropForth>
+          <DropFifth></DropFifth>
+        </div>
+      </Container>
+    </section>
   );
 };

@@ -8,11 +8,13 @@ export const Container = styled.section`
 export const ContactTitle = styled.h3`
   font-size: 26px;
   text-align: center;
+  color: #ffffff;
   opacity: 0.7;
   margin: 0 auto 40px;
 `;
 export const ContactSubtitle = styled.h4`
   font-size: 20px;
   text-align: center;
+  color: #ffffff;
   opacity: 0.7;
 `;

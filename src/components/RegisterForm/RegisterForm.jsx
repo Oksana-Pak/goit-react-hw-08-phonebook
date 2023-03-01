@@ -29,24 +29,26 @@ export const RegisterForm = () => {
     form.reset();
   };
   return (
-    <Container>
-      <FormRegister onSubmit={handleSubmit} autoComplete="off">
-        <FormTitle>Welcome</FormTitle>
-        <Input type="text" name="name" placeholder="Username" />
+    <section>
+      <Container>
+        <FormRegister onSubmit={handleSubmit} autoComplete="off">
+          <FormTitle>Welcome</FormTitle>
+          <Input type="text" name="name" placeholder="Username" />
 
-        <Input type="email" name="email" placeholder="Email" />
+          <Input type="email" name="email" placeholder="Email" />
 
-        <Input type="password" name="password" placeholder="Password" />
+          <Input type="password" name="password" placeholder="Password" />
 
-        <Button type="submit">Sign Up</Button>
-      </FormRegister>
-      <div>
-        <DropFirst></DropFirst>
-        <DropSecond></DropSecond>
-        <DropThird></DropThird>
-        <DropForth></DropForth>
-        <DropFifth></DropFifth>
-      </div>
-    </Container>
+          <Button type="submit">Sign Up</Button>
+        </FormRegister>
+        <div>
+          <DropFirst></DropFirst>
+          <DropSecond></DropSecond>
+          <DropThird></DropThird>
+          <DropForth></DropForth>
+          <DropFifth></DropFifth>
+        </div>
+      </Container>
+    </section>
   );
 };
