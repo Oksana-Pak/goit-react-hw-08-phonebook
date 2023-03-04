@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const ContactContainer = styled.ul`
-  width: 50%;
   margin: 15px auto 0;
   padding: 20px;
   display: flex;

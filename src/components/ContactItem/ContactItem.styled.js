@@ -10,9 +10,17 @@ export const Item = styled.li`
   color: #ffffff;
   opacity: 0.8;
 `;
+export const Text = styled.p`
+  width: 25%;
+`;
 
+export const ButtonWrap = styled.div`
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+`;
 export const ButtonStyled = styled(Button)`
-  width: 100px;
+  width: 45%;
   margin: 0;
   padding: 5px;
 `;

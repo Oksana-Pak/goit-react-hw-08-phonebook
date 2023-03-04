@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { successMessage } from 'components/services/notifications';
-import { Item, ButtonStyled } from './ContactItem.styled';
+import { Item, Text, ButtonWrap, ButtonStyled } from './ContactItem.styled';
+import { changeContact } from 'redux/contacts/contactsSlice';
 
 export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
@@ -11,12 +12,17 @@ export const ContactItem = ({ id, name, number }) => {
     dispatch(deleteContact(id));
     successMessage(`${name} was delete from contacts`);
   };
-
+  const handleEditContact = () => {
+    dispatch(changeContact({ id, name, number }));
+  };
   return (
     <Item>
-      <p>{name}</p>
-      <p>{number}</p>
-      <ButtonStyled onClick={handleDelete}>Delete</ButtonStyled>
+      <Text>{name}</Text>
+      <Text>{number}</Text>
+      <ButtonWrap>
+        <ButtonStyled onClick={handleEditContact}>Edit</ButtonStyled>
+        <ButtonStyled onClick={handleDelete}>Delete</ButtonStyled>
+      </ButtonWrap>
     </Item>
   );
 };

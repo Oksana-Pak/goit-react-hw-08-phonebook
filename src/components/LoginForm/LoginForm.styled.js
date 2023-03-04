@@ -1,18 +1,19 @@
 import styled from 'styled-components';
+import { Form, Field } from 'formik';
 
 export const Container = styled.div`
+  width: 25%;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 55%;
   left: 50%;
 `;
-export const Form = styled.form`
+export const FormikForm = styled(Form)`
   position: relative;
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.3);
   padding: 45px;
-  height: 320px;
   border-radius: 20px;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -30,13 +31,13 @@ export const FormTitle = styled.p`
   opacity: 0.7;
   font-size: 24px;
   margin-top: 0;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 `;
-export const Input = styled.input`
-  width: 200px;
+export const FormikInput = styled(Field)`
+  width: 85%;
+  margin: 15px auto;
   padding: 15px;
-  margin-bottom: 35px;
   font-weight: 500;
   color: #fff;
   background: transparent;
@@ -68,8 +69,8 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  margin: 0 auto;
-  width: 200px;
+  margin: 15px auto 0;
+  width: 80%;
   padding: 15px;
   font-weight: 500;
   font-size: 16px;
@@ -90,6 +91,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
 const Drop = styled.div`
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);

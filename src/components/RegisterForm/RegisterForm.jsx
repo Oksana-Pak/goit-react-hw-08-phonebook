@@ -1,9 +1,12 @@
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import {
   Container,
   FormTitle,
-  Input,
+  FormikForm,
+  FormikInput,
   Button,
   DropFirst,
   DropSecond,
@@ -11,36 +14,73 @@ import {
   DropForth,
   DropFifth,
 } from '../LoginForm/LoginForm.styled';
-import { FormRegister } from './RegisterForm.styled';
 
+import { FormikError } from '../ContactForm/ContactForm.styled';
+
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Name may contain only letters, apostrophe, dash and spaces.'
+    )
+    .required('name is a required field'),
+  email: yup
+    .string()
+    .trim()
+    .min(8, 'Too short email! Please, enter min 8 symbols')
+    .max(30, 'Too long email! Please, enter max 30 symbols')
+    .matches(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+
+      'Email can only contain English letters.'
+    )
+    .required('email is a required field'),
+  password: yup
+    .string()
+    .trim()
+    .min(8, 'Too short email! Please, enter min 8 symbols')
+    .max(30, 'Too long email! Please, enter max 30 symbols')
+
+    .required('password is a required field'),
+});
+
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+};
 export const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(register(values));
+    resetForm();
   };
+
   return (
     <section>
       <Container>
-        <FormRegister onSubmit={handleSubmit} autoComplete="off">
-          <FormTitle>Welcome</FormTitle>
-          <Input type="text" name="name" placeholder="Username" />
-
-          <Input type="email" name="email" placeholder="Email" />
-
-          <Input type="password" name="password" placeholder="Password" />
-
-          <Button type="submit">Sign Up</Button>
-        </FormRegister>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          <FormikForm autoComplete="off">
+            <FormTitle>Welcome</FormTitle>
+            <FormikInput type="text" name="name" placeholder="Username" />
+            <FormikError name="name" component="p" />
+            <FormikInput type="email" name="email" placeholder="Email" />
+            <FormikError name="email" component="p" />
+            <FormikInput
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <FormikError name="password" component="p" />
+            <Button type="submit">Sign Up</Button>
+          </FormikForm>
+        </Formik>
         <div>
           <DropFirst></DropFirst>
           <DropSecond></DropSecond>

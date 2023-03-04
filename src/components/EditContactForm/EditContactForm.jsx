@@ -1,12 +1,10 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contacts/selectors';
-import { addContact } from 'redux/contacts/operations';
-import {
-  errorMessage,
-  successMessage,
-} from 'components/services/notifications';
+import { selectContacts, selectEditContact } from 'redux/contacts/selectors';
+import { updateContact } from 'redux/contacts/operations';
+import { changeContact } from 'redux/contacts/contactsSlice';
+import { successMessage } from 'components/services/notifications';
 
 import {
   FormikForm,
@@ -14,7 +12,7 @@ import {
   FormikInput,
   FormikError,
   ButtonStyled,
-} from './ContactForm.styled';
+} from '../ContactForm/ContactForm.styled';
 
 const schema = yup.object().shape({
   name: yup
@@ -33,25 +31,30 @@ const schema = yup.object().shape({
     .required('number is a required field'),
 });
 
-const initialValues = {
-  name: '',
-  number: '',
-};
-
-export const ContactForm = () => {
+export const EditContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-
-  const checkContact = name => contacts.find(contact => name === contact.name);
+  const { id, name, number } = useSelector(selectEditContact);
+  const initialValues = {
+    id,
+    name,
+    number,
+  };
+  const checkContact = values =>
+    contacts.find(
+      contact =>
+        values.name === contact.name && values.number === contact.number
+    );
 
   const handleSubmit = (values, { resetForm }) => {
-    if (checkContact(values.name)) {
-      errorMessage(`Sorry, the contact ${values.name} is already in contacts`);
+    if (checkContact(values)) {
+      dispatch(changeContact());
       return;
     }
 
-    dispatch(addContact(values));
-    successMessage(`${values.name} is added to contacts`);
+    dispatch(updateContact(values));
+
+    successMessage(`${values.name} was changed in contacts`);
     resetForm();
   };
 
@@ -72,7 +75,7 @@ export const ContactForm = () => {
           <FormikInput type="tel" name="number" />
           <FormikError name="number" component="p" />
         </FormikLabel>
-        <ButtonStyled type="submit">Add contact</ButtonStyled>
+        <ButtonStyled type="submit">Change contact</ButtonStyled>
       </FormikForm>
     </Formik>
   );

@@ -5,6 +5,7 @@ import {
   selectError,
   selectIsLoading,
   selectContacts,
+  selectEditContact,
 } from 'redux/contacts/selectors';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
@@ -15,12 +16,14 @@ import {
   ContactSubtitle,
 } from './ContactsPage.styled';
 import { Loader } from 'components/Loader';
+import { ContactModal } from 'components/ContactModal';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const contacts = useSelector(selectContacts);
+  const editContact = useSelector(selectEditContact);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -38,6 +41,7 @@ const ContactsPage = () => {
           <ContactList />
         </>
       )}
+      {editContact && <ContactModal />}
     </Container>
   );
 };
